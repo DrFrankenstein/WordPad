@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.htm" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="wordpad.rc">
