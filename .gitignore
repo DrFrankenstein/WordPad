@@ -1,4 +1,7 @@
 .vs/
+Debug/
+Release/
+amd64/
 
 # Prerequisites
 *.d
