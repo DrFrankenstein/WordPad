@@ -50,11 +50,14 @@ BOOL CParaFormat::operator==(PARAFORMAT2& pf)
 	if(
 		dwMask != pf.dwMask
 		|| wNumbering != pf.wNumbering
+#if _RICHEDIT_VER >= 0x0200
 		|| wEffects != pf.wEffects
+#endif
 		|| dxStartIndent != pf.dxStartIndent
 		|| dxRightIndent != pf.dxRightIndent
 		|| dxOffset != pf.dxOffset
 		|| cTabCount != pf.cTabCount
+#if _RICHEDIT_VER >= 0x0200
 		|| dySpaceBefore != pf.dySpaceBefore
 		|| dySpaceAfter != pf.dySpaceAfter
 		|| dyLineSpacing != pf.dyLineSpacing
@@ -69,6 +72,7 @@ BOOL CParaFormat::operator==(PARAFORMAT2& pf)
 		|| wBorderSpace != pf.wBorderSpace
 		|| wBorderWidth != pf.wBorderWidth
 		|| wBorders != pf.wBorders
+#endif
 		)
 	{
 		return FALSE;

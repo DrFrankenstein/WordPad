@@ -26,6 +26,8 @@
 #include <afxrich.h>
 #include <afxpriv.h>
 
+#include "polyfill.h"       // in case we're using an old SDK
+
 #define HORZ_TEXTOFFSET 15
 #define VERT_TEXTOFFSET 5
 
