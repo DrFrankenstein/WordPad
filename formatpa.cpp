@@ -61,6 +61,9 @@ CFormatParaDlg::CFormatParaDlg(PARAFORMAT2& pf, CWnd* pParent /*=NULL*/)
 #if _RICHEDIT_VER >= 0x0200
 	m_nAfter = m_pf.dySpaceAfter;
 	m_nBefore = m_pf.dySpaceBefore;
+#else
+	m_nAfter = 0;
+	m_nBefore = 0;
 #endif
 
 	//{{AFX_DATA_INIT(CFormatParaDlg)
@@ -176,6 +179,8 @@ BOOL CFormatParaDlg::OnInitDialog()
 #if _RICHEDIT_VER >= 0x0200
 	m_bPageBreak = (m_pf.dwMask & PFM_PAGEBREAKBEFORE) &&
 				   (m_pf.wEffects & PFE_PAGEBREAKBEFORE);
+#else
+	m_bPageBreak = FALSE;
 #endif
 
 	m_nRight = (m_pf.dwMask & PFM_RIGHTINDENT) ? m_pf.dxRightIndent : DDXM_BLANK;
