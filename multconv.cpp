@@ -365,7 +365,7 @@ BOOL CConverter::Open(LPCTSTR pszFileName, UINT nOpenFlags,
 
 	// let's make sure we could do what is wanted directly even though we aren't
 	m_bCloseOnDelete = FALSE;
-	m_hFile = (HANDLE)hFileNull;
+	m_hFile = hFileNull;
 
 	BOOL bOpen = CFile::Open(lpszFileNameT, nOpenFlags, pException);
 	CFile::Close();
@@ -497,6 +497,7 @@ ULONGLONG CConverter::GetLength() const
 CFile* CConverter::Duplicate() const
 {
 	AfxThrowNotSupportedException();
+	return NULL;
 }
 
 void CConverter::LockRange(ULONGLONG, ULONGLONG)
