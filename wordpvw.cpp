@@ -321,6 +321,35 @@ BOOL CWordPadView::OnPreparePrinting(CPrintInfo* pInfo)
 	return DoPreparePrinting(pInfo);
 }
 
+void CWordPadView::OnPrinterChanged(const CDC& dcPrinter)
+{
+	if (theApp.m_bWin31 && dcPrinter.m_hDC != NULL)
+	{	// MFC doesn't know how to get the paper size on Win3, so we need to
+		// do it in its place.
+
+		// GETPHYSPAGESIZE does not actually mutate the DC, AFAIK, but other
+		// escapes might, so that requires a non-const DC.
+		CDC& mutablePrinter = const_cast<CDC&>(dcPrinter);
+		
+		CPoint physSize;
+		mutablePrinter.Escape(GETPHYSPAGESIZE, 0, NULL, (LPVOID) &physSize);
+
+		const CSize pageSize = CPoint(
+			MulDiv(physSize.x, 1440, dcPrinter.GetDeviceCaps(LOGPIXELSX)),
+			MulDiv(physSize.y, 1440, dcPrinter.GetDeviceCaps(LOGPIXELSY))
+		);
+
+		if (GetPaperSize() != pageSize)
+		{
+			SetPaperSize(pageSize);
+			if (m_nWordWrap == WrapToTargetDevice)
+				WrapChanged();	// reflow contents if wrap-to-ruler is on
+		}
+	}
+	else
+		CRichEditView::OnPrinterChanged(dcPrinter);
+}
+
 /////////////////////////////////////////////////////////////////////////////
 // OLE Client support and commands
 

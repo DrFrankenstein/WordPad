@@ -49,6 +49,7 @@ public:
 	virtual void OnPrint(CDC* pDC, CPrintInfo* pInfo);
 	//}}AFX_VIRTUAL
 	BOOL OnPreparePrinting(CPrintInfo* pInfo);
+	virtual void OnPrinterChanged(const CDC& dcPrinter);
 	virtual HRESULT GetClipboardData(CHARRANGE* lpchrg, DWORD reco,
 		LPDATAOBJECT lpRichDataObj, LPDATAOBJECT* lplpdataobj);
 	virtual HRESULT QueryAcceptData(LPDATAOBJECT, CLIPFORMAT*, DWORD,
