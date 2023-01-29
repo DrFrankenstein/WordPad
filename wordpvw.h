@@ -54,6 +54,7 @@ public:
 		LPDATAOBJECT lpRichDataObj, LPDATAOBJECT* lplpdataobj);
 	virtual HRESULT QueryAcceptData(LPDATAOBJECT, CLIPFORMAT*, DWORD,
 		BOOL, HGLOBAL);
+
 public:
 	virtual void WrapChanged();
 

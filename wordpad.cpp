@@ -318,8 +318,8 @@ BOOL CALLBACK CWordPadApp::StaticEnumProc(HWND hWnd, LPARAM lParam)
 void CWordPadApp::RegisterFormats()
 {
 	cfEmbeddedObject = (CLIPFORMAT)::RegisterClipboardFormat(_T("Embedded Object"));
-	cfRTF = (CLIPFORMAT)::RegisterClipboardFormat(CF_RTF);
-	cfRTO = (CLIPFORMAT)::RegisterClipboardFormat(CF_RETEXTOBJ);
+	cfRTF = (CLIPFORMAT)::RegisterClipboardFormat(_T(CF_RTF));
+	cfRTO = (CLIPFORMAT)::RegisterClipboardFormat(_T(CF_RETEXTOBJ));
 }
 
 CDocOptions& CWordPadApp::GetDocOptions(LONG_PTR nDocType)
