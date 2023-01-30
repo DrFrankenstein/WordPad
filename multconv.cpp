@@ -163,7 +163,7 @@ CConverter::CConverter(CFrameWnd* pWnd) : CTrackFile(pWnd)
 
 CConverter::~CConverter()
 {
-	if (!m_bDone) // converter thread hasn't exited
+	if (!m_bDone && m_hEventFile != NULL) // converter thread hasn't exited
 	{
 		WaitForConverter();
 		m_nBytesAvail = 0;
@@ -398,7 +398,15 @@ BOOL CConverter::Open(LPCTSTR pszFileName, UINT nOpenFlags,
 	m_hBuff = GlobalAlloc(GHND, BUFFSIZE);
 	ASSERT(m_hBuff != NULL);
 
-	AfxBeginThread(ConverterThread, this, THREAD_PRIORITY_NORMAL, 0, 0, &sa);
+	CWinThread* thread = AfxBeginThread(ConverterThread, this, THREAD_PRIORITY_NORMAL, 0, 0, &sa);
+	if (thread == NULL)
+	{
+		VERIFY(CloseHandle(m_hEventConv));
+		m_hEventConv = NULL;
+		VERIFY(CloseHandle(m_hEventFile));
+		m_hEventFile = NULL;
+		return FALSE;
+	}
 
 	return TRUE;
 }
